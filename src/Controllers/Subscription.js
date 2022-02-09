@@ -1,6 +1,6 @@
 require('dotenv').config();
-const {STRIPE_PRIVATE_KEY, STRIPE_PUBLISHABLE_KEY} = process.env
-const stripe = require('stripe')(STRIPE_PRIVATE_KEY);
+const {PRIVATE, PUBLISHABLE} = process.env
+const stripe = require('stripe')(PRIVATE);
 const { Router } = require("express");
 const router = Router();
 router.post("/create-subscription", async (req, res, next) => {
@@ -24,7 +24,7 @@ router.post("/create-subscription", async (req, res, next) => {
     res.send({
       subscriptionId: subscription.id,
       clientSecret: subscription.latest_invoice.payment_intent.client_secret,
-      clientPublishable: STRIPE_PUBLISHABLE_KEY,
+      clientPublishable: PUBLISHABLE,
       customerId,
       priceId
     });

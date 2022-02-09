@@ -1,7 +1,7 @@
 const {Router} = require("express")
 require('dotenv').config();
-const {STRIPE_PRIVATE_KEY} = process.env
-const stripe = require('stripe')(STRIPE_PRIVATE_KEY);
+const {PRIVATE} = process.env
+const stripe = require('stripe')(PRIVATE);
 const router = Router();
 
 router.get('/', async (req, res, next) => {

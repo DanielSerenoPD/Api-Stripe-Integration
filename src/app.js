@@ -1,10 +1,10 @@
 require('dotenv').config();
-const {STRIPE_PRIVATE_KEY} = process.env
-const stripe = require('stripe')(STRIPE_PRIVATE_KEY);
+const {PRIVATE} = process.env
+const stripe = require('stripe')(PRIVATE);
 const express = require('express');
 const routes = require("./Routes");
 const errorHandler = require('./Utils/Middlewares/ErrorHandler.js')
-const PlansService = require("./services/plans");
+const PlansService = require("./Services/Plans");
 const app = express();
 const cors = require('cors');
 app.use(express.static('public'));

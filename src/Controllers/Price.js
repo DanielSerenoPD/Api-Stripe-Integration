@@ -1,6 +1,6 @@
 require('dotenv').config();
-const {STRIPE_PRIVATE_KEY} = process.env
-const stripe = require('stripe')(STRIPE_PRIVATE_KEY);
+const {PRIVATE} = process.env
+const stripe = require('stripe')(PRIVATE);
 const {Router} = require("express")
 const router = Router()
 router.get('/', async (req, res, next) => {
@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
       expand: ['data.product']
     });
     res.send({
-      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      publishableKey: process.env.PUBLISHABLE,
       prices: prices.data,
     });
   }catch(error){
