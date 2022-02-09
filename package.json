@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "web": "npm start",
     "start": "nodemon -L"
   },
   "author": "PD",
