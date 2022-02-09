@@ -1,6 +1,6 @@
 require('dotenv').config();
-const {STRIPE_PRIVATE_KEY} = process.env
-const stripe = require("stripe")(STRIPE_PRIVATE_KEY)
+const {PRIVATE} = process.env
+const stripe = require("stripe")(PRIVATE)
 const db = require("../Firebase");
 const preferencesPlans = require("./PreferencesPlans");
 const prices = require("./Prices");
