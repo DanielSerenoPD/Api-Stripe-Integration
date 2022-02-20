@@ -1,14 +1,21 @@
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+equire('dotenv').config();
 const key = require('../../account.json');
 const firebaseConfig = {
-    apiKey: "AIzaSyCK8_KnJ0OChI1EbRdojDc4L9aMxw8mBJE",
-    authDomain: "yes-fitness-f2c41.firebaseapp.com",
-    projectId: "yes-fitness-f2c41",
-    storageBucket: "yes-fitness-f2c41.appspot.com",
-    messagingSenderId: "773942840110",
-    appId: "1:773942840110:web:e9a430d3537fedfb5708bf"
-  };
-initializeApp(firebaseConfig);
+  "type": process.env.type,
+  "project_id": process.env.project_id,
+  "private_key_id": process.env.private_key_id,
+  "private_key":process.env.private_key,
+  "client_email": process.env.client_email,
+  "client_id": process.env.client_id,
+  "auth_uri": process.env.auth_uri,
+  "token_uri": process.env.token_uri,
+  "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
+  "client_x509_cert_url": process.env.client_x509_cert_url
+};
+initializeApp({
+    credential:cert(firebaseConfig)
+});
 const db = getFirestore();
 module.exports = db;
