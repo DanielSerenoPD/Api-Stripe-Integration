@@ -12,6 +12,7 @@ router.post("/create-subscription", async (req, res, next) => {
     const {priceId, customerId }= req.body;
     const subscription = await stripe.subscriptions.create({
       customer: customerId,
+      cancel_at_period_end: true,
       items: [
         {
           price: priceId,

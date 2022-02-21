@@ -1,6 +1,6 @@
 const preferences = {
     planBasic: {
-      name: "5 Clases",
+      name: "10 Clases",
       description: "Este paquete contiene 5 clases no acumulables.",
       active: true,
       images: [],
@@ -9,13 +9,13 @@ const preferences = {
       }
     },
     planStandard: {
-        name: "10 Clases",
+        name: "20 Clases",
         description: "Este paquete contiene 10 clases no acumulables.",
         active: true,
         images: [],
     },
     planPremium: {
-        name: "15 Clases",
+        name: "30 Clases",
         description: "Este paquete contiene 15 clases no acumulables.",
         active: true,
         images: [],
