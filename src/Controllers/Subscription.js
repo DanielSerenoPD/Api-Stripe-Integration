@@ -34,7 +34,6 @@ router.post("/create-subscription", async (req, res, next) => {
 }
 });
 router.post("/cancel-subscription", async (req, res, next) => {
-  // Cancel the subscription
   try {
     const deletedSubscription = await stripe.subscriptions.del(
       req.body.subscriptionId
