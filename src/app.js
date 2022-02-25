@@ -6,24 +6,16 @@ const routes = require("./Routes");
 const errorHandler = require('./Utils/Middlewares/ErrorHandler.js')
 const PlansService = require("./Services/Plans");
 const app = express();
-const cors = require('cors');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "Authortization",
-    ],
-  })
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 async function seeders() {
   await new PlansService().generatePlans();

@@ -4,10 +4,6 @@ const stripe = require('stripe')(PRIVATE);
 const { Router } = require("express");
 const router = Router();
 router.post("/create-subscription", async (req, res, next) => {
-  //obtenemos el customer
-  //const {customerId} = req.cookies["customer"];
-  // obtenemos el id del precio desde el frontend
-  //creamos la subscription
   try {
     const {priceId, customerId }= req.body;
     const subscription = await stripe.subscriptions.create({
@@ -21,9 +17,13 @@ router.post("/create-subscription", async (req, res, next) => {
       payment_behavior: "default_incomplete",
       expand: ["latest_invoice.payment_intent"],
     });
+
+    console.log(new Date(subscription.current_period_end*1000).toLocaleDateString("en-US"));
+    console.log(subscription.current_period_end);
     //almacenar datos de subscription en firebase
     res.send({
-      subscriptionId: subscription.id,
+      subscriptionId: {id:subscription.id, dateStart:new Date(subscription.current_period_start*1000).toLocaleDateString("en-US"), 
+        dateEnd:new Date(subscription.current_period_end*1000).toLocaleDateString("en-US")},
       clientSecret: subscription.latest_invoice.payment_intent.client_secret,
       clientPublishable: PUBLISHABLE,
       customerId,
@@ -57,12 +57,12 @@ router.post("/update-subscription", async (req, res, next) => {
         items: [
           {
             id: subscription.items.data[0].id,
-            price: process.env[req.body.newPriceLookupKey.toUpperCase()],
+            price: req.body.price,
           },
         ],
       }
     );
-
+      console.log(updatedSubscription)
     res.send({ subscription: updatedSubscription });
   }catch(error){
     next(error);

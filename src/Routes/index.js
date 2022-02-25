@@ -7,7 +7,7 @@ const subscription = require('../Controllers/Subscription')
 const price = require('../Controllers/Price');
 router.use('/create-customer',customer)
 router.use('/create-subscriptor',subscriptor)
-router.use('/invoice-preview',invoicePreview)
+//router.use('/invoice-preview',invoicePreview)
 router.use('/subscription',subscription)
 router.use('/prices',price)
 
